@@ -1,4 +1,3 @@
-// Данные викторины, распределенные по уровням сложности
 const quizData = {
     easy: [
         { question: "What is the capital of the United States?", options: ["New York", "Washington, D.C.", "Los Angeles", "Chicago"], correct: 1 },
@@ -23,47 +22,28 @@ const quizData = {
     ]
 };
 
-// DOM-элементы для разных разделов игры и кнопок управления
 const mainMenu = document.getElementById("main-menu");
 const levelSelection = document.getElementById("level-selection");
 const quizContainer = document.getElementById("quiz-container");
 const quizElement = document.getElementById("quiz");
 const scoreContainer = document.getElementById("score");
 const nextButton = document.getElementById("next");
+const submitButton = document.getElementById("submit-button");
 const mainMenuButton = document.getElementById("main-menu-btn");
 const returnMenuButton = document.getElementById("return-menu");
 
-// Переменные для текущего состояния игры
 let currentLevel = "";
 let username = "";
 let currentQuestionIndex = 0;
 let score = 0;
 
-// Обработчик события для кнопки "Start"
+// Start Button Event
 document.getElementById("start-button").addEventListener("click", () => {
     mainMenu.classList.add("d-none");
     levelSelection.classList.remove("d-none");
 });
 
-//Next button
-function handleNextButton(){
-	currentQuestionIndex ++;
-	if (currentQuestionIndex < questions.length) {
-		showQuestion();
-	} else {
-		showScore();
-	}
-}
-
-nextButton.addEventListener("click", () => {
-	if (currentQuestionIndex < questions.length) {
-		handleNextButton();
-	} else {
-		startQuiz();
-	}
-});
-
-// Обработчики кнопок уровней сложности
+// Level Button Events
 document.querySelectorAll(".level-btn").forEach(button => {
     button.addEventListener("click", (e) => {
         currentLevel = e.target.dataset.level;
@@ -78,21 +58,20 @@ document.querySelectorAll(".level-btn").forEach(button => {
     });
 });
 
-// Функция загрузки текущего вопроса викторины
+// Load Quiz
 function loadQuiz() {
     const currentQuizData = quizData[currentLevel][currentQuestionIndex];
     quizElement.innerHTML = `
-        <div class="question fs-4 fw-bolder" >${currentQuizData.question}</div>
+        <div class="question fs-4 fw-bolder">${currentQuizData.question}</div>
         ${currentQuizData.options.map((option, index) => 
             `<div class="form-check alert alert-primary">
-                <input class="form-check-input " type="radio" name="answer" id="option${index}" value="${index}">
+                <input class="form-check-input" type="radio" name="answer" id="option${index}" value="${index}">
                 <label class="form-check-label" for="option${index}">${option}</label>
-            </div>`
-        ).join('')}
+            </div>`).join('')}
     `;
 }
 
-// Функция получения выбранного ответа
+// Get Selected Answer
 function getSelected() {
     const answers = document.getElementsByName("answer");
     let selectedAnswer = -1;
@@ -104,29 +83,37 @@ function getSelected() {
     return selectedAnswer;
 }
 
-// Обработчик кнопки "Submit"
-submitButton.addEventListener("click", () => {
+// Handle Next Button Click
+nextButton.addEventListener("click", () => {
     const selectedAnswer = getSelected();
     if (selectedAnswer === -1) {
         alert("Please select an answer!");
         return;
     }
 
+    // Check answer
     if (selectedAnswer === quizData[currentLevel][currentQuestionIndex].correct) {
         score++;
     }
 
     currentQuestionIndex++;
+
+    // Check if quiz is over or not
     if (currentQuestionIndex < quizData[currentLevel].length) {
-        loadQuiz();
+        loadQuiz(); // Load next question
     } else {
-        quizElement.innerHTML = "<h3 class='text-center'>Quiz Completed!</h3>";
-        scoreContainer.textContent = `${username}, your score: ${score}/${quizData[currentLevel].length}`;
-        
-        submitButton.style.display = "none";
-        mainMenuButton.classList.remove("d-none");
+        showScore(); // Show score if quiz is complete
     }
 });
+
+// Show Score
+function showScore() {
+    quizElement.innerHTML = "<h3 class='text-center'>Quiz Completed!</h3>";
+    scoreContainer.textContent = `${username}, your score: ${score}/${quizData[currentLevel].length}`;
+
+    nextButton.style.display = "none"; // Hide next button after quiz completion
+    mainMenuButton.classList.remove("d-none"); // Show return to main menu button
+}
 
 // Main Menu Button Event
 mainMenuButton.addEventListener("click", () => {
@@ -139,7 +126,7 @@ mainMenuButton.addEventListener("click", () => {
     levelSelection.classList.add("d-none");
     mainMenu.classList.remove("d-none");
     mainMenuButton.classList.add("d-none");
-    submitButton.style.display = "block";
+    nextButton.style.display = "block"; // Show next button
     scoreContainer.textContent = "";
 });
 
@@ -148,8 +135,8 @@ returnMenuButton.addEventListener("click", () => {
     currentQuestionIndex = 0;
     score = 0;
     scoreContainer.textContent = "";
-    submitButton.style.display = "block";
-    mainMenuButton.classList.add("d-none");
+    nextButton.style.display = "block"; // Show next button
+    mainMenuButton.classList.add("d-none"); // Hide return to main menu button
     levelSelection.classList.remove("d-none");
     quizContainer.classList.add("d-none");
 });
