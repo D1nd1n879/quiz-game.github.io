@@ -1,0 +1,117 @@
+/* Основные стили */
+body {
+    font-family: Georgia, 'Times New Roman', Times, serif;
+    font-style: oblique;
+    color: aliceblue;
+    height: 100vh;
+    margin: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: linear-gradient(
+        rgba(0, 0, 0, 0.4), 
+        rgba(0, 0, 0, 0.6)
+      ),
+      url('https://media.istockphoto.com/id/1339908748/vector/new-realistic-neon-sign-of-quiz-frame-logo-for-decoration-and-covering-on-the-dark-wall.jpg?s=612x612&w=0&k=20&c=Qn97UPTD2E-MXDC9khiDW9vQglFtjNCFvCtF0EkiDP8=') 
+      center/cover no-repeat;
+  }
+  
+  /* Заголовки */
+  h1 {
+    font-family: Georgia, 'Times New Roman', Times, serif;
+    font-weight: bold;
+    text-align: center;
+    text-shadow: 0 0 10px #ff4500, 0 0 20px #ff4500, 0 0 30px #ff4500;
+    animation: glow 2s infinite;
+  }
+  
+  /* Анимация свечения текста */
+  @keyframes glow {
+    0%, 100% {
+      text-shadow: 0 0 10px #ff4500, 0 0 20px #ff4500, 0 0 30px #ff4500;
+    }
+    50% {
+      text-shadow: 0 0 10px #00ff00, 0 0 20px #00ff00, 0 0 30px #00ff00;
+    }
+  }
+  
+  /* Контейнеры */
+  .container {
+    margin-top: 50px;
+    max-width: 600px;
+  }
+  
+  .quiz-container {
+    background: rgba(255, 255, 255, 0.9);
+    padding: 20px;
+    border-radius: 12px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+    transition: transform 0.3s ease;
+  }
+  
+  .quiz-container:hover {
+    transform: translateY(-5px);
+  }
+  
+  /* Скрытые элементы */
+  .d-none {
+    display: none;
+  }
+  
+  /* Кнопки */
+  button {
+    width: 100%;
+    padding: 10px;
+    border: none;
+    border-radius: 8px;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: all 0.3s ease;
+  }
+  
+  button:hover {
+    box-shadow: 0 0 10px 3px #000a4c, 0 0 20px 6px #ff991d;
+    transform: scale(1.05);
+  }
+  
+  /* Уровни сложности */
+  .level-btn {
+    font-size: 1.2rem;
+    margin-bottom: 10px;
+    color: #fff;
+    transition: all 0.3s ease;
+  }
+  
+  .level-btn[data-level="easy"] {
+    background-color: #28a745;
+  }
+  
+  .level-btn[data-level="easy"]:hover {
+    box-shadow: 0 0 15px #28a745, 0 0 30px #28a745;
+  }
+  
+  .level-btn[data-level="medium"] {
+    background-color: #ffc107;
+    color: #000;
+  }
+  
+  .level-btn[data-level="medium"]:hover {
+    box-shadow: 0 0 15px #ffc107, 0 0 30px #ffc107;
+  }
+  
+  .level-btn[data-level="hard"] {
+    background-color: #dc3545;
+  }
+  
+  .level-btn[data-level="hard"]:hover {
+    box-shadow: 0 0 15px #dc3545, 0 0 30px #dc3545;
+  }
+  
+  /* Результаты */
+  .score {
+    font-size: 1.5rem;
+    font-weight: bold;
+    margin-top: 20px;
+    color: #ff4500;
+    text-align: center;
+  }
