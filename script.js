@@ -64,9 +64,9 @@ function loadQuiz() {
     quizElement.innerHTML = `
         <div class="question fs-4 fw-bolder">${currentQuizData.question}</div>
         ${currentQuizData.options.map((option, index) => 
-            `<div class="form-check alert alert-primary">
-                <input class="form-check-input" type="radio" name="answer" id="option${index}" value="${index}">
-                <label class="form-check-label" for="option${index}">${option}</label>
+            `<div class="form-check alert alert-light">
+                <input class="form-check-input" type="radio" name="answer" id="option${index}" value="${index}" hidden>
+                <label class="form-check-label w-100 p-2" for="option${index}">${option}</label>
             </div>`).join('')}
     `;
 }
