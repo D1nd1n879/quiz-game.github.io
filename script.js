@@ -13,6 +13,7 @@ const quizData = {
         { question: "Who holds the record for the most Formula 1 World Championship titles?", options: ["Max Verstappen", "Lando Norris", "Michael Schumacher", "Charles Leclerc"], correct: 2 },
         { question: "Which continent is the Sahara Desert located on?", options: ["Asia", "Africa", "South America", "Australia"], correct: 1 }
     ],
+    
     hard: [
         { question: "What year did humans first land on the moon?", options: ["1965", "1969", "1972", "1975"], correct: 1 },
         { question: "Which country has won the most FIFA World Cups?", options: ["Germany", "Italy", "Brazil", "Argentina"], correct: 2 },
